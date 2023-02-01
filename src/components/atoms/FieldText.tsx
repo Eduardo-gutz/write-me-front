@@ -10,9 +10,10 @@ interface FieldTextProps {
   name: string
   label: string
   password?: boolean
+  disabled?: boolean
 }
 
-const FieldText = ({ error, onChange, defaultValue, value, label, name, id, password }: FieldTextProps) => {
+const FieldText = ({ error, onChange, defaultValue, value, label, name, id, password, disabled }: FieldTextProps) => {
   const [focus, setFocus] = useState<boolean>(false);
   const [valueInner, setValue] = useState<string>(value ?? '')
   const [isVisible, setIsVisible] = useState<boolean>(false)
@@ -22,7 +23,7 @@ const FieldText = ({ error, onChange, defaultValue, value, label, name, id, pass
   }, [onChange, valueInner])
 
   return (
-    <div className={`w-full h-14 rounded bg-slate-300 relative px-4 ${error ? 'border-red-400 border-2' : ''}`}>
+    <div className={`w-full h-14 rounded bg-slate-300 relative px-4 ${error ? 'border-red-400 border-2' : ''} ${disabled ? 'opacity-60' : ''}`}>
       <label
         htmlFor={name}
         className={`absolute text-base font-medium top-2/4 -translate-y-1/2 z-10 transition-all ${focus || valueInner.length > 0 ? '-translate-y-[150%] text-xs' : '-translate-y-1/2'}`}
@@ -39,6 +40,7 @@ const FieldText = ({ error, onChange, defaultValue, value, label, name, id, pass
         onChange={(e) => setValue(e.target.value)}
         value={valueInner}
         defaultValue={defaultValue}
+        disabled={disabled}
       />
       {password &&
         <span
@@ -52,7 +54,7 @@ const FieldText = ({ error, onChange, defaultValue, value, label, name, id, pass
           }
         </span>}
       {typeof error === 'string' &&
-        <span className="absolute -bottom-[2px] text-sm font-medium text-red-500">{error}</span>
+        <span className="absolute top-[70%] text-sm font-medium text-red-500">{error}</span>
       }
     </div>
   )
