@@ -29,7 +29,7 @@ const Login = () => {
         toast.error('There was an error logging in, please check your credentials.');
       },
       onSuccess(data) {
-        dispatch(loginRedux(data))
+        dispatch(loginRedux({...data, isLogged: true}))
         push('/editor')
       }
     })
@@ -49,11 +49,10 @@ const Login = () => {
             control={control}
             rules={{
               required,
-              pattern: email
             }}
             render={({ field: { onChange, name, value }, formState: { errors } }) =>
               <FieldText
-                label="Email"
+                label="Username or Email"
                 name={name}
                 value={value}
                 onChange={onChange}

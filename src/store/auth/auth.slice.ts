@@ -6,6 +6,8 @@ const initialState: AuthState = {
   username: '',
   id: '',
   email: '',
+  lastName: '',
+  name: '',
   accessToken: '',
   refreshToken: '',
   isLogged: false
@@ -16,6 +18,8 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     loginRedux: (state, action: PayloadAction<AuthState>) => {
+      localStorage.setItem('access_token', action.payload.accessToken)
+      localStorage.setItem('refresh_token', action.payload.refreshToken)
       return {
         ...action.payload
       }

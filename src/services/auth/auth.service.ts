@@ -7,3 +7,9 @@ export const login = async (data: {username: string, password: string}) => {
 
   return response.data
 }
+
+export const logout = async (userId: string) => {
+  const response = await axiosInstance.post(`/auth/logout/${userId}`)
+
+  return response.data
+}

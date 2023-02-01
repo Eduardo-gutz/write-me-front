@@ -33,15 +33,24 @@ const Signup = () => {
   const { mutate, isLoading } = useMutation({mutationFn: createUser})
 
   const onSubmit = async (data: SignupForm) => {
-    console.log("🚀 ~ file: register.tsx:35 ~ onSubmit ~ data", data)
     const payload = formToPayloadCreateUser(data)
 
     mutate(payload, {
-      onError() {
-        toast.error('There was an error logging in, please check your credentials.');
+      onError(error: any) {
+        if(error.response.data.statusCode=== 400) {
+          if(error.response.data.message.includes('email')) {
+            toast.error('This email address has already been registered please login');
+            return
+          }
+          if(error.response.data.message.includes('username')) {
+            toast.error('Sorry you have to choose a different username');
+            return
+          }
+        }
+        toast.error('There was an error at the time of registration please verify your data.');
       },
       onSuccess(data) {
-        dispatch(loginRedux(data))
+        dispatch(loginRedux({...data, isLogged: true}))
         push('/editor')
       }
     })
@@ -68,7 +77,7 @@ const Signup = () => {
                 name={name}
                 value={value}
                 onChange={onChange}
-                error={errors.email?.message}
+                error={errors.name?.message}
                 disabled={isLoading}
               />
             }
@@ -82,7 +91,7 @@ const Signup = () => {
                 name={name}
                 value={value}
                 onChange={onChange}
-                error={errors.email?.message}
+                error={errors.secondName?.message}
                 disabled={isLoading}
               />
             }
@@ -99,7 +108,7 @@ const Signup = () => {
                 name={name}
                 value={value}
                 onChange={onChange}
-                error={errors.email?.message}
+                error={errors.lastName?.message}
                 disabled={isLoading}
               />
             }
@@ -113,7 +122,7 @@ const Signup = () => {
                 name={name}
                 value={value}
                 onChange={onChange}
-                error={errors.email?.message}
+                error={errors.secondLastname?.message}
                 disabled={isLoading}
               />
             }
@@ -130,7 +139,7 @@ const Signup = () => {
                 name={name}
                 value={value}
                 onChange={onChange}
-                error={errors.email?.message}
+                error={errors.username?.message}
                 disabled={isLoading}
               />
             }
@@ -147,7 +156,7 @@ const Signup = () => {
                 name={name}
                 value={value}
                 onChange={onChange}
-                error={errors.email?.message}
+                error={errors.countryCode?.message}
                 disabled={isLoading}
                 options={[
                   {value: 'MX', label: 'Mexico'},
@@ -201,7 +210,7 @@ const Signup = () => {
             rules={{
               required,
               validate: {
-                isEqual: v => v !== getValues('password') ? 'La contraseña no coincide': true
+                isEqual: v => v !== getValues('password') ? 'Password does not match': true
               }
             }}
             render={({ field: { onChange, name, value }, formState: { errors } }) =>
@@ -210,7 +219,7 @@ const Signup = () => {
                 name={name}
                 onChange={onChange}
                 value={value}
-                error={errors.password?.message}
+                error={errors.confirm?.message}
                 password
                 disabled={isLoading}
               />
