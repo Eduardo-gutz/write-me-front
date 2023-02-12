@@ -16,7 +16,7 @@ const Navbar = ({openDrawer}: NavabarProps) => {
     push(path)
   }
   return (
-    <header className="flex items-center pr-24 pl-[70px] w-full h-16 bg-neutral-700">
+    <header className="flex items-center pr-24 pl-[70px] w-full h-14 bg-neutral-700">
       <nav className="w-full flex justify-between">
         <div className="text-slate-300 font-bold text-[32px] items-center cursor-pointer" onClick={() => redirect('/')}>
           Write.Me
@@ -32,7 +32,7 @@ const Navbar = ({openDrawer}: NavabarProps) => {
               </Button>
             </>
             :
-            <div className="w-12 h-12" onClick={openDrawer}>
+            <div className="w-10 h-10" onClick={openDrawer}>
               <Avatar name={`${userStore.username}`} />
             </div>
           }

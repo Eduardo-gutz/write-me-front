@@ -3,9 +3,11 @@ import { global } from "../enviroments/global";
 
 const axiosInstance = axios.create({
   baseURL: global.api_url,
-  headers: {
-    Authorization: typeof window !== "undefined" ? localStorage.getItem('access_token') : ''
-  }
+})
+
+axiosInstance.interceptors.request.use((config) => {
+  config.headers.Authorization = typeof window !== "undefined" ? `bearer ${localStorage.getItem('access_token')}`  : ''
+  return config
 })
 
 export default axiosInstance

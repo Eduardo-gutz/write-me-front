@@ -47,9 +47,9 @@ const Login = () => {
           <Controller
             name="email"
             control={control}
-            rules={{
-              required,
-            }}
+            // rules={{
+            //   required,
+            // }}
             render={({ field: { onChange, name, value }, formState: { errors } }) =>
               <FieldText
                 label="Username or Email"
@@ -64,10 +64,10 @@ const Login = () => {
           <Controller
             name="password"
             control={control}
-            rules={{
-              required,
-              pattern: password
-            }}
+            // rules={{
+            //   required,
+            //   pattern: password
+            // }}
             render={({ field: { onChange, name, value }, formState: { errors } }) =>
               <FieldText
                 label="Password"

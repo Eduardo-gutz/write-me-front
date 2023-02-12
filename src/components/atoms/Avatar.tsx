@@ -22,7 +22,7 @@ const Avatar = ({ name, src }: AvatarProps) => {
           <img className="w-full h-full rounded-full" src={src} alt={name} />
         </>
         :
-        <p className="text-2xl font-extrabold text-neutral-700">{ getAvatarLetters() }</p>
+        <p className="text-xl font-extrabold text-neutral-700">{ getAvatarLetters() }</p>
       }
     </div>
   )

@@ -1,5 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import authReducer from './auth/auth.slice'
+import docsReducer from './docs/docs.slice'
+import currentReducer from './currentDocs/currentDocs.slice'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import thunk from 'redux-thunk'
@@ -10,7 +12,9 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-  authReducer
+  authReducer,
+  docsReducer,
+  currentReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

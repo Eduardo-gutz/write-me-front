@@ -13,7 +13,7 @@ const initialState: AuthState = {
   isLogged: false
 }
 
-export const counterSlice = createSlice({
+export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
@@ -32,6 +32,6 @@ export const counterSlice = createSlice({
   },
 })
 
-export const { loginRedux, logoutRedux } = counterSlice.actions
+export const { loginRedux, logoutRedux } = authSlice.actions
 
-export default counterSlice.reducer
+export default authSlice.reducer
