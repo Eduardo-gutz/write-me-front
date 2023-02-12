@@ -1,19 +1,19 @@
-import { DocDTO } from "@/interfaces/services/docs.interface";
+import { DocDTO, DocStored } from "@/interfaces/services/docs.interface";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: DocDTO[] = [];
+const initialState: DocStored[] = [];
 
 const currentDocsSlice = createSlice({
   name: "currentDocs",
   initialState,
   reducers: {
-    addDoc: (state, action: PayloadAction<DocDTO>) => {
+    addDoc: (state, action: PayloadAction<DocStored>) => {
       return [...state, action.payload];
     },
-    setCurrentDocsList: (state, action: PayloadAction<DocDTO[]>) => {
+    setCurrentDocsList: (state, action: PayloadAction<DocStored[]>) => {
       return [...action.payload]
     },
-    removeDoc: (state, action: PayloadAction<DocDTO>) => {
+    removeDoc: (state, action: PayloadAction<DocStored>) => {
       const stateDocs = state.filter((doc) => doc.id !== action.payload.id);
       return [...stateDocs];
     },

@@ -1,18 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { AuthState } from '@/interfaces/services/auth.interface'
-import { DocList } from '@/interfaces/services/docs.interface'
+import { DocListStored } from '@/interfaces/services/docs.interface'
 
-const initialState: DocList[] = []
+const initialState: DocListStored[] = []
 
 export const docsSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setDocsList: (state, action: PayloadAction<DocList[]>) => {
+    setDocsList: (state, action: PayloadAction<DocListStored[]>) => {
       return [...action.payload]
     },
-    removeDocsList: (state, action: PayloadAction<DocList[]>) => {
+    removeDocsList: (state, action: PayloadAction<DocListStored[]>) => {
       return []
     },
   },

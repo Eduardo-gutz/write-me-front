@@ -12,7 +12,9 @@ const Editor = () => {
   useQuery(['docs'], getAllDocuments, {
     enabled: isLogged,
     onSuccess(data) {
-      dispatch(setDocsList(data))
+      if(data) {
+        dispatch(setDocsList(data))
+      }
     }
   })
 
